@@ -1,32 +1,47 @@
 flowchart LR
+  %% Orientation gauche→droite
+  %% Mobile
   subgraph Mobile
     M[App.js\nReact Native]
   end
 
+  %% Backend
   subgraph Backend
     A[main.py\nFastAPI Routes]
     B[database.py\nSQLite helpers]
     A -->|calls| B
   end
 
-  subgraph DB[(SQLite)]
+  %% Base de données (déclare d’abord le subgraph, puis les nœuds)
+  subgraph DB
+    direction TB
     T1[(users)]
     T2[(transactions)]
     T3[(pools)]
     T4[(pool_contributions)]
   end
 
+  %% Relations DB
   B --> T1
   B --> T2
   B --> T3
   B --> T4
 
+  %% Endpoints (simples nœuds “note”)
   E1[/signup & login/]
   E2[/deposit • transfer • feed/]
   E3[/pools/]
   E4[/pools/{id}/contribute/]
 
-  M --> E1 --> A
-  M --> E2 --> A
-  M --> E3 --> A
-  M --> E4 --> A
+  %% Liaison endpoints → backend
+  E1 --> A
+  E2 --> A
+  E3 --> A
+  E4 --> A
+
+  %% Appel mobile → endpoints
+  M --> E1
+  M --> E2
+  M --> E3
+  M --> E4
+
