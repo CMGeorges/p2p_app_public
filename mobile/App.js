@@ -1,0 +1,1 @@
+// feat (moibile): add React Native app entry point
