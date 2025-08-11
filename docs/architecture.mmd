@@ -1,0 +1,32 @@
+flowchart LR
+  subgraph Mobile
+    M[App.js\nReact Native]
+  end
+
+  subgraph Backend
+    A[main.py\nFastAPI Routes]
+    B[database.py\nSQLite helpers]
+    A -->|calls| B
+  end
+
+  subgraph DB[(SQLite)]
+    T1[(users)]
+    T2[(transactions)]
+    T3[(pools)]
+    T4[(pool_contributions)]
+  end
+
+  B --> T1
+  B --> T2
+  B --> T3
+  B --> T4
+
+  E1[/signup & login/]
+  E2[/deposit • transfer • feed/]
+  E3[/pools/]
+  E4[/pools/{id}/contribute/]
+
+  M --> E1 --> A
+  M --> E2 --> A
+  M --> E3 --> A
+  M --> E4 --> A

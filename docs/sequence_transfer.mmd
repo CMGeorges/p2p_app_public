@@ -1,0 +1,17 @@
+sequenceDiagram
+  participant RN as App.js (RN)
+  participant API as FastAPI /main.py
+  participant DB as SQLite /database.py
+
+  RN->>API: POST /login {username, password}
+  API->>DB: get_password_hash(username)
+  DB-->>API: hash
+  API-->>RN: {token}
+
+  RN->>API: POST /transfer {sender, recipient, amount, msg}\nAuthorization: Bearer token
+  API->>API: get_current_username() -> validate token
+  API->>DB: get_user_by_username(sender/recipient)
+  DB-->>API: rows
+  API->>DB: update_balance(sender, -amount)\nupdate_balance(recipient, +amount)\ncreate_transaction(...)
+  DB-->>API: ok
+  API-->>RN: {message, balances}

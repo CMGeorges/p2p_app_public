@@ -1,0 +1,38 @@
+classDiagram
+  class users {
+    +id: int PK
+    +username: text UNIQUE
+    +password_hash: text?
+    +balance: real
+    +created_at: text
+  }
+
+  class transactions {
+    +id: int PK
+    +sender_id: int FK->users.id
+    +recipient_id: int FK->users.id
+    +amount: real
+    +message: text
+    +timestamp: text
+  }
+
+  class pools {
+    +id: int PK
+    +name: text
+    +owner_id: int FK->users.id
+    +created_at: text
+  }
+
+  class pool_contributions {
+    +id: int PK
+    +pool_id: int FK->pools.id
+    +user_id: int FK->users.id
+    +amount: real
+    +message: text
+    +timestamp: text
+  }
+
+  users <|-- transactions : sender_id/recipient_id
+  users <|-- pools : owner_id
+  pools <|-- pool_contributions : pool_id
+  users <|-- pool_contributions : user_id
