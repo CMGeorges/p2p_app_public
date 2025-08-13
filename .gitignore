@@ -1,0 +1,24 @@
+cat > .gitignore << 'EOF'
+# Dépendances / artefacts
+node_modules/
+__pycache__/
+dist/
+build/
+
+# Environnements & secrets
+.env
+*.env
+*.env.*
+*.key
+*.pem
+
+# Bases locales
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs
+*.log
+EOF
+git add .gitignore
+git commit -m "chore: add public .gitignore (ignore env, db, build, logs)"
