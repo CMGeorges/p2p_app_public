@@ -27,11 +27,11 @@ flowchart LR
   B --> T3
   B --> T4
 
-  %% Endpoints (simples nœuds “note”)
-  E1[/signup & login/]
-  E2[/deposit • transfer • feed/]
-  E3[/pools/]
-  E4[/pools/{id}/contribute/]
+  %% Endpoints (nœuds quotés pour éviter les conflits)
+  E1["/signup & login"]
+  E2["/deposit • transfer • feed"]
+  E3["/pools"]
+  E4["/pools/{id}/contribute"]
 
   %% Liaison endpoints → backend
   E1 --> A
